@@ -1,7 +1,9 @@
+using System;
 using System.Linq;
 using API.Data;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -21,7 +23,10 @@ namespace API.Controllers
         [Route("list")]
         public IActionResult List()
         {
-            return Ok(_context.Vendas.ToList());
+            return Ok(_context.Vendas
+            .Include(v => v.Cliente)
+            .Include(v => v.Itens)
+            .ToList());
         }
     }
 }
