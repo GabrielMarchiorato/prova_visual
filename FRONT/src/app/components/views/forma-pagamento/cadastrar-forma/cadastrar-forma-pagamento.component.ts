@@ -1,45 +1,42 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Categoria } from "src/app/models/categoria";
+import { FormaPagamento } from "src/app/models/forma-pagamento";
 import { Produto } from "src/app/models/produto";
 import { CategoriaService } from "src/app/services/categoria.service";
+import { FormaPagamentoService } from "src/app/services/forma-pagamento.service";
 import { ProdutoService } from "src/app/services/produto.service";
 
 @Component({
-    selector: "app-cadastrar-produto",
-    templateUrl: "./cadastrar-produto.component.html",
-    styleUrls: ["./cadastrar-produto.component.css"],
+    selector: "app-cadastrar-forma-pagamento",
+    templateUrl: "./cadastrar-forma-pagamento.component.html",
+    styleUrls: ["./cadastrar-forma-pagamento.component.css"],
 })
-export class CadastrarProdutoComponent implements OnInit {
+export class CadastrarFormaPagamentoComponent implements OnInit {
     nome!: string;
     descricao!: string;
     quantidade!: number;
     preco!: number;
     categorias!: Categoria[];
-    categoriaId!: number;
+    formaId!: number;
 
     constructor(
         private router: Router,
-        private produtoService: ProdutoService,
-        private categoriaService: CategoriaService
+        private service: FormaPagamentoService,
     ) {}
 
     ngOnInit(): void {
-        this.categoriaService.list().subscribe((categorias) => {
-            this.categorias = categorias;
-        });
     }
 
     cadastrar(): void {
-        let produto: Produto = {
+        let forma: FormaPagamento = {
             nome: this.nome,
             descricao: this.descricao,
-            preco: this.preco,
-            quantidade: this.quantidade,
-            categoriaId: this.categoriaId,
+            formaId: this.formaId,
+            CriadoEm: new Date(),
         };
-        this.produtoService.create(produto).subscribe((produto) => {
-            console.log(produto);
+        this.service.create(forma).subscribe((forma) => {
+            console.log(forma);
             this.router.navigate(["produto/listar"]);
         });
     }
