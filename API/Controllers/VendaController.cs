@@ -24,7 +24,6 @@ namespace API.Controllers
         public IActionResult List()
         {
             return Ok(_context.Vendas
-            .Include(v => v.Cliente)
             .Include(v => v.Itens)
             .ToList());
         }
