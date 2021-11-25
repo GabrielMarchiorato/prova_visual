@@ -37,7 +37,7 @@ export class CadastrarFormaPagamentoComponent implements OnInit {
         };
         this.service.create(forma).subscribe((forma) => {
             console.log(forma);
-            this.router.navigate(["produto/listar"]);
+            this.router.navigate(["forma-pagamento/listar"]);
         });
     }
 }

@@ -22,6 +22,8 @@ import { IndexComponent } from "./components/views/home/index/index.component";
 import { CadastrarProdutoComponent } from "./components/views/produto/cadastrar-produto/cadastrar-produto.component";
 import { ListarProdutoComponent } from "./components/views/produto/listar-produto/listar-produto.component";
 import { CarrinhoComponent } from './components/views/home/carrinho/carrinho.component';
+import { ListarFormaPagamentoComponent } from "./components/views/forma-pagamento/listar-formas/listar-forma-pagamento.component";
+import { CadastrarFormaPagamentoComponent } from "./components/views/forma-pagamento/cadastrar-forma/cadastrar-forma-pagamento.component";
 
 @NgModule({
     declarations: [
@@ -31,6 +33,8 @@ import { CarrinhoComponent } from './components/views/home/carrinho/carrinho.com
         TemplateComponent,
         IndexComponent,
         CarrinhoComponent,
+        ListarFormaPagamentoComponent,
+        CadastrarFormaPagamentoComponent
     ],
     imports: [
         BrowserModule,

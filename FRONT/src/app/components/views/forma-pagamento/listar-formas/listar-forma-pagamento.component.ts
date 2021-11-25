@@ -12,12 +12,9 @@ import { ProdutoService } from "src/app/services/produto.service";
 export class ListarFormaPagamentoComponent implements OnInit {
     formas: FormaPagamento[] = [];
     colunasExibidas: String[] = [
-        "id",
+        "formaId",
         "nome",
         "descricao",
-        "preco",
-        "quantidade",
-        "categoria",
     ];
 
     constructor(private service: FormaPagamentoService) {}
