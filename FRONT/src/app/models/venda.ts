@@ -5,4 +5,5 @@ export interface Venda {
     Cliente: string;
     Itens: ItemVenda[];
     CriadoEm?: Date;
+    ValorTotal?: number;
 }

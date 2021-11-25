@@ -18,8 +18,8 @@ export class CartService {
 
     constructor(private http: HttpClient) {}
 
-    list(): Observable<Venda[]> {
-        return this.http.get<Venda[]>(`${this.baseUrl}/list`);
+    list() {
+        return this.http.get(`${this.baseUrl}/list`);
     }
 
     create(venda: Venda): Observable<Venda> {
@@ -43,7 +43,7 @@ export class CartService {
         }
         this.updateInLocalStorage();
     }
-    
+
     removeItemFromCart(item: ItemVenda): void {
         this.venda.Itens.splice(this.venda.Itens.indexOf(item), 1);
         this.updateInLocalStorage();

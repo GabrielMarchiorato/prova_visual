@@ -13,14 +13,16 @@ export class CarrinhoComponent implements OnInit {
     itens: ItemVenda[] = [];
     carrinho: Venda = {} as Venda;
     colunasExibidas: String[] = ["nome", "preco", "quantidade", "imagem"];
+    colunasVendas: String[] = ["cliente", "preco", "criadoEm"];
     valorTotal!: number;
+    vendasAnteriores: Venda[] = [];
     constructor(private cartService: CartService) {
         this.cartService.getFromLocalStorage();
     }
 
     ngOnInit(): void {
         this.carrinho = this.cartService.getCarrinho();
-
+        this.retornarVendasAnteriores();
         this.calculateTotal()
     }
 
@@ -41,5 +43,26 @@ export class CarrinhoComponent implements OnInit {
             },
             (error) => alert("Erro ao realizar a compra!")
             )
+    }
+
+    retornarVendasAnteriores(){
+        this.cartService.list().subscribe(
+            (vendas: any) => {
+                let VendasAnteriores = vendas
+                console.log(VendasAnteriores)
+                VendasAnteriores.map((venda: any) => {
+                    let valorTotal = 0;
+                    console.log(venda)
+                    venda.itens.forEach((item: any) => {
+                        valorTotal += item.preco;
+                    })
+                    venda.ValorTotal = valorTotal;
+                    return venda;
+                })
+                this.vendasAnteriores = VendasAnteriores
+            },
+            console.log
+        )
+
     }
 }
