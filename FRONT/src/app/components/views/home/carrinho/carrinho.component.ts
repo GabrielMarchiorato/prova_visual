@@ -34,7 +34,11 @@ export class CarrinhoComponent implements OnInit {
 
     checkout() {
         this.cartService.create(this.carrinho).subscribe(
-            (venda) => alert("Compra realizada com sucesso!"),
+            (venda) => {
+                alert("Compra realizada com sucesso!")
+                this.cartService.clear();
+                this.valorTotal = 0;
+            },
             (error) => alert("Erro ao realizar a compra!")
             )
     }

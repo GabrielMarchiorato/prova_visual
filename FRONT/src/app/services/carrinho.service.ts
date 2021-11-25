@@ -23,13 +23,13 @@ export class CartService {
     }
 
     create(venda: Venda): Observable<Venda> {
-        console.log(venda);
-        venda.Itens.forEach(item => {
+        let payload = {...venda}
+        payload.Itens.forEach(item => {
             item.produtoId = item.produto!.produtoId!;
             delete item.produto;
         });
 
-        return this.http.post<Venda>(`${this.baseUrl}/create`, venda);
+        return this.http.post<Venda>(`${this.baseUrl}/create`, payload);
     }
 
     addItensToCart(item: ItemVenda): void {
@@ -64,6 +64,15 @@ export class CartService {
                 CriadoEm: new Date(Date.now()),
             };
         }
+    }
+
+    clear() {
+        this.venda.Itens = [];
+        this.deleteCartFromLocalStorage();
+    }
+
+    deleteCartFromLocalStorage(): void {
+        localStorage.removeItem("venda");
     }
 
     getCarrinho(): Venda {
