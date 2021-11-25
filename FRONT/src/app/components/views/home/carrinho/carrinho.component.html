@@ -3,7 +3,7 @@
         <mat-card-title>Carrinho de Compras</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <table mat-table [dataSource]="itens" class="table mat-elevation-z8">
+        <table mat-table [dataSource]="carrinho.Itens" class="table mat-elevation-z8">
             <!-- Coluna do Imagem -->
             <ng-container matColumnDef="imagem">
                 <th class="header" mat-header-cell *matHeaderCellDef>Imagem</th>
@@ -21,14 +21,14 @@
             <!-- Coluna do Quantidade -->
             <ng-container matColumnDef="quantidade">
                 <th class="header" mat-header-cell *matHeaderCellDef>
-                    Descrição
+                    Quantidade
                 </th>
                 <td mat-cell *matCellDef="let item">{{ item.quantidade }}</td>
             </ng-container>
             <!-- Coluna do Quantidade -->
             <ng-container matColumnDef="preco">
                 <th class="header" mat-header-cell *matHeaderCellDef>
-                    Quantidade
+                    Valor Unitário
                 </th>
                 <td mat-cell *matCellDef="let item">
                     {{ item.preco | currency: "BRL" }}
@@ -43,5 +43,8 @@
         <mat-card-title>
             Total: {{ valorTotal | currency: "BRL" }}
         </mat-card-title>
+
+        
+    <button mat-button color="primary" (click)="checkout()">Finalizar compra</button>
     </mat-card-header>
 </mat-card>

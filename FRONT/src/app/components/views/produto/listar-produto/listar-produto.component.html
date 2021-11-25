@@ -36,6 +36,12 @@
             {{ produto.categoria!.nome }}
         </td>
     </ng-container>
+    <ng-container matColumnDef="adicionar">
+        <th mat-header-cell *matHeaderCellDef>Adicionar ao carrinho</th>
+        <td mat-cell *matCellDef="let produto" (click)="addToCart(produto)">
+            <mat-icon mat-list-icon >add</mat-icon>
+        </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="colunasExibidas"></tr>
     <tr mat-row *matRowDef="let row; columns: colunasExibidas"></tr>

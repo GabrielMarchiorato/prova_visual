@@ -34,7 +34,7 @@ import { CadastrarFormaPagamentoComponent } from "./components/views/forma-pagam
         IndexComponent,
         CarrinhoComponent,
         ListarFormaPagamentoComponent,
-        CadastrarFormaPagamentoComponent
+        CadastrarFormaPagamentoComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,17 +1,20 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Categoria } from "../models/categoria";
 import { ItemVenda } from "../models/item-venda";
 import { Venda } from "../models/venda";
 
 @Injectable({
     providedIn: "root",
 })
-export class CategoriaService {
+export class CartService {
     private baseUrl = "http://localhost:5000/api/venda";
 
-    venda: Venda = {} as Venda;
+    venda: Venda = {
+        Itens: [],
+        Cliente: "",
+        CriadoEm: new Date(Date.now()),
+    };
 
     constructor(private http: HttpClient) {}
 
@@ -20,14 +23,50 @@ export class CategoriaService {
     }
 
     create(venda: Venda): Observable<Venda> {
+        console.log(venda);
+        venda.Itens.forEach(item => {
+            item.produtoId = item.produto!.produtoId!;
+            delete item.produto;
+        });
+
         return this.http.post<Venda>(`${this.baseUrl}/create`, venda);
     }
 
     addItensToCart(item: ItemVenda): void {
-        this.venda.Itens.push(item);
+        let itens = this.venda.Itens;
+
+        let foundItem = itens.find((i: ItemVenda) => i.produto!.produtoId === item.produto!.produtoId);
+        if (foundItem){
+            foundItem.quantidade += item.quantidade;
+        } else {
+            itens.push(item);
+        }
+        this.updateInLocalStorage();
     }
     
     removeItemFromCart(item: ItemVenda): void {
         this.venda.Itens.splice(this.venda.Itens.indexOf(item), 1);
+        this.updateInLocalStorage();
+    }
+
+    updateInLocalStorage(): void {
+        localStorage.setItem("venda", JSON.stringify(this.venda));
+    }
+
+    getFromLocalStorage(): void {
+        let stored = localStorage.getItem("venda");
+        if (stored) {
+            this.venda = JSON.parse(stored);
+        } else {
+            this.venda = {
+                Itens: [],
+                Cliente: "",
+                CriadoEm: new Date(Date.now()),
+            };
+        }
+    }
+
+    getCarrinho(): Venda {
+        return this.venda;
     }
 }

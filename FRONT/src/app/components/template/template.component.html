@@ -2,7 +2,9 @@
     <button (click)="sidenav.toggle()" mat-icon-button>
         <mat-icon>menu</mat-icon>
     </button>
-    <a class="title" mat-button routerLink=""> Ecommerce</a>
+    <a class="title" mat-button routerLink="/home/carrinho"> Ecommerce</a>
+
+    <mat-icon mat-list-icon>shopping_cart</mat-icon>
 </mat-toolbar>
 
 <mat-sidenav-container class="container">
@@ -25,7 +27,11 @@
                 <mat-icon mat-list-icon>list</mat-icon>
                 Listar Formas de Pagamento</a
             >
+            <a mat-list-item routerLink="/home/carrinho">
+                <mat-icon mat-list-icon>shopping_cart</mat-icon>
+                Carrinho</a>
         </mat-nav-list>
+        
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="content">
