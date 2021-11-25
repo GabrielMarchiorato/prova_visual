@@ -7,7 +7,7 @@ namespace API.Models
     {
         public Venda() => CriadoEm = DateTime.Now;
         public int VendaId { get; set; }
-        public Usuario Cliente { get; set; }
+        public String Cliente { get; set; }
         public List<ItemVenda> Itens { get; set; }
         public DateTime CriadoEm { get; set; }
     }
