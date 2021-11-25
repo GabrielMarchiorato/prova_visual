@@ -28,5 +28,15 @@ namespace API.Controllers
             .Include(v => v.Itens)
             .ToList());
         }
+
+        [HttpPost]
+        [Route("create")]
+        public IActionResult Create([FromBody] Venda venda)
+        {
+            _context.Vendas.Add(venda);
+            _context.SaveChanges();
+            return Created("", venda);
+        }
+
     }
 }
