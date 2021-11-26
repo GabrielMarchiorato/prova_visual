@@ -23,11 +23,16 @@ export class CartService {
     }
 
     create(venda: Venda): Observable<Venda> {
+        console.log(venda);
         let payload = {...venda}
+        payload.FormaPagamentoId = venda.FormaPagamento!.formaPagamentoId;
+        delete payload.FormaPagamento;
         payload.Itens.forEach(item => {
             item.produtoId = item.produto!.produtoId!;
             delete item.produto;
+
         });
+        console.log(payload);
 
         return this.http.post<Venda>(`${this.baseUrl}/create`, payload);
     }

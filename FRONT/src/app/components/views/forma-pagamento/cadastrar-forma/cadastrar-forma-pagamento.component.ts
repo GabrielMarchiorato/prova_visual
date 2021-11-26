@@ -32,7 +32,7 @@ export class CadastrarFormaPagamentoComponent implements OnInit {
         let forma: FormaPagamento = {
             nome: this.nome,
             descricao: this.descricao,
-            formaId: this.formaId,
+            formaPagamentoId: this.formaId,
             CriadoEm: new Date(),
         };
         this.service.create(forma).subscribe((forma) => {

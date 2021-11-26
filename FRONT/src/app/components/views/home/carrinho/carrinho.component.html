@@ -3,6 +3,26 @@
         <mat-card-title>Carrinho de Compras</mat-card-title>
     </mat-card-header>
     <mat-card-content>
+        <mat-form-field class="input" id="descricao">
+            <mat-label for="descricao">Nome do cliente:</mat-label>
+            <input
+                matInput
+                type="text"
+                name="descricao"
+                [(ngModel)]="carrinho.Cliente"
+            />
+        </mat-form-field>
+        <mat-form-field class="input" id="forma">
+            <mat-label for="forma">Forma de pagamento:</mat-label>
+            <mat-select name="forma" [(ngModel)]="carrinho.FormaPagamentoId">
+                <mat-option
+                    *ngFor="let forma of formasPagamento"
+                    value="{{ forma.formaPagamentoId }}"
+                >
+                    {{ forma.nome }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <table mat-table [dataSource]="carrinho.Itens" class="table mat-elevation-z8">
             <!-- Coluna do Imagem -->
             <ng-container matColumnDef="imagem">
@@ -67,6 +87,12 @@
                 <th class="header" mat-header-cell *matHeaderCellDef>Nome do cliente</th>
                 <td mat-cell *matCellDef="let item">
                     {{ item.cliente }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="formaPagamento">
+                <th class="header" mat-header-cell *matHeaderCellDef>Forma de pagamento</th>
+                <td mat-cell *matCellDef="let item">
+                    {{ item.formaPagamento?.nome }}
                 </td>
             </ng-container>
             <!-- Coluna do Quantidade -->

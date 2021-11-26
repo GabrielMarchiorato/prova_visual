@@ -25,6 +25,7 @@ namespace API.Controllers
         {
             return Ok(_context.Vendas
             .Include(v => v.Itens)
+            .Include(v => v.FormaPagamento)
             .ToList());
         }
 
